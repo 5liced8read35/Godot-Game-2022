@@ -1,0 +1,118 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://scene/obstacle.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scene/ground.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scene/SmallObstacle.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scene/BadGuy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://default_env.tres" type="Environment" id=6]
+[ext_resource path="res://scene/LightSwitch.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Weapons/ammo_pickup/ammo_pickup.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scene/Door.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scene/door.gd" type="Script" id=10]
+[ext_resource path="res://scene/FakeSwitch.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scene/Treasure.tscn" type="PackedScene" id=12]
+
+[node name="World" type="Spatial"]
+
+[node name="Ground" parent="." instance=ExtResource( 2 )]
+transform = Transform( 20, 0, -3.01992e-06, 0, -0.004, 0, 3.01992e-06, 0, 20, 0, 0, 0 )
+
+[node name="Ground2" parent="." instance=ExtResource( 2 )]
+transform = Transform( 19.3429, 0, -2.92069e-06, 0, -0.004, 0, 3.01992e-06, 0, 20, 0.0282364, 0, -70.8683 )
+
+[node name="Ground3" parent="." instance=ExtResource( 2 )]
+transform = Transform( 10.8868, 0, -1.64386e-06, 0, -0.004, 0, 2.48798e-06, 0, 16.4771, 0, 0, -34.9914 )
+
+[node name="Inputs" type="Spatial" parent="."]
+
+[node name="FakeSwitch" parent="Inputs" instance=ExtResource( 11 )]
+transform = Transform( -4.37114e-08, 0.422618, 0.906308, 0, 0.906308, -0.422618, -1, -1.84732e-08, -3.9616e-08, -12.5422, 3.01134, -1.71748 )
+
+[node name="LightSwitch" parent="Inputs" instance=ExtResource( 7 )]
+transform = Transform( -4.37114e-08, 0.422618, 0.906308, 0, 0.906308, -0.422618, -1, -1.84732e-08, -3.9616e-08, -12.5422, 2.97902, -0.37282 )
+light = NodePath("../../SpotLight")
+on_by_default = false
+
+[node name="Obstacles" type="Spatial" parent="."]
+
+[node name="Obstacle2" parent="Obstacles" instance=ExtResource( 1 )]
+transform = Transform( 6.47205, 0, 0, 0, 16.1884, 0, 0, 0, 6.47205, -29.8789, 15.1053, 39.8498 )
+
+[node name="Obstacle3" parent="Obstacles" instance=ExtResource( 1 )]
+transform = Transform( 0.437359, 0, 0, 0, 2.77562, 0, 0, 0, 9.8899, -12.9796, 3.07049, -1.91142 )
+
+[node name="SmallObstacle" parent="Obstacles" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 11.7854, 1.07367, -13.6298 )
+
+[node name="SmallObstacle2" parent="Obstacles" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.3103, 1.07367, -11.492 )
+
+[node name="SmallObstacle3" parent="Obstacles" instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 10.3146, 3.07783, -11.4993 )
+
+[node name="House" type="Spatial" parent="Obstacles"]
+
+[node name="Obstacle5" parent="Obstacles/House" instance=ExtResource( 1 )]
+transform = Transform( -1.91019e-08, 0, 7.568, 0, 6.053, 0, -0.437, 0, -3.30808e-07, 12.606, 5.932, -71.788 )
+
+[node name="Obstacle7" parent="Obstacles/House" instance=ExtResource( 1 )]
+transform = Transform( 0.437, 0, 0, 0, 6.053, 0, 0, 0, 12, 19.5, 5.932, -83.3306 )
+
+[node name="Obstacle8" parent="Obstacles/House" instance=ExtResource( 1 )]
+transform = Transform( 0.437, 0, 0, 0, 6.053, 0, 0, 0, 12, -19.4405, 5.932, -83.3306 )
+
+[node name="Obstacle6" parent="Obstacles/House" instance=ExtResource( 1 )]
+transform = Transform( -6.55148e-09, 0, 2.59564, 0, 3.5691, 0, -0.437, 0, -3.30808e-07, 2.55424, 11.0154, -71.788 )
+
+[node name="Obstacle4" parent="Obstacles/House" instance=ExtResource( 1 )]
+transform = Transform( -1.90188e-08, 0, 9.83881, 0, 6.05344, 0, -0.437359, 0, -4.32301e-07, -9.80232, 5.93167, -71.7875 )
+
+[node name="NewFPS" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.53346, 0 )
+
+[node name="BadGuy" parent="." instance=ExtResource( 5 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.158188, 2.96077, -9.32118 )
+
+[node name="UI" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 2.0
+
+[node name="InteractionLabel" type="Label" parent="UI"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -142.0
+text = "Press E to Interact"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="SpotLight" type="SpotLight" parent="."]
+transform = Transform( 0.99825, 0.029774, 0.0511013, -0.051073, -0.00171156, 0.998694, 0.0298226, -0.999555, -0.000187914, -9.37974, 5.64857, -1.46603 )
+layers = 3
+light_energy = 4.061
+spot_angle = 71.7188
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = ExtResource( 6 )
+
+[node name="Ammo" type="Spatial" parent="."]
+
+[node name="AmmoPickup" parent="Ammo" instance=ExtResource( 8 )]
+transform = Transform( 2.84652, 0, 0, 0, 2.84652, 0, 0, 0, 2.84652, 0, 0.226044, 13.0935 )
+
+[node name="AmmoPickup2" parent="Ammo" instance=ExtResource( 8 )]
+transform = Transform( 2.84652, 0, 0, 0, 2.84652, 0, 0, 0, 2.84652, 4.49034, 0.226044, 13.0935 )
+
+[node name="Door" parent="." instance=ExtResource( 9 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.52846, 2.58808, -72.2033 )
+script = ExtResource( 10 )
+
+[node name="Treasure" parent="." instance=ExtResource( 12 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 2.23412, 0.870719, -81.0591 )
+
+[connection signal="die" from="Inputs/FakeSwitch" to="NewFPS" method="_on_FakeSwitch_die"]
+[connection signal="switch_on" from="Inputs/LightSwitch" to="Door" method="_on_LightSwitch_switch_on"]
+[connection signal="finish_game" from="Treasure" to="NewFPS" method="_on_Treasure_finish_game"]

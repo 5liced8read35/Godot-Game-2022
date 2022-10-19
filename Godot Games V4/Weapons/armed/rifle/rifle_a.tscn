@@ -1,0 +1,170 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Weapons/armed/rifle/rifle.gd" type="Script" id=1]
+[ext_resource path="res://Weapons/armed/rifle/AssaultRifleV6.obj" type="ArrayMesh" id=2]
+[ext_resource path="res://Weapons/muzzle_flash.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Equip"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Root:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 90, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "show_weapon"
+} ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "Fire"
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Root:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 18.949, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "fire_bullet"
+} ]
+}
+
+[sub_resource type="Animation" id=2]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Root:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "Reload"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/path = NodePath("Root:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( 180, 0, 0 ), Vector3( 0, 0, 0 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "reload"
+} ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Unequip"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Root:rotation_degrees")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector3( 0, 0, 0 ), Vector3( -90, 0, 0 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "hide_weapon"
+} ]
+}
+
+[node name="Rifle_A" type="Spatial"]
+script = ExtResource( 1 )
+weapon_name = "Rifle"
+ammo_in_mag = 30
+extra_ammo = 60
+impact_effect = ExtResource( 3 )
+muzzle_flash_path = NodePath("Root/Anchor/MuzzleFlash")
+equip_speed = 1.5
+unequip_speed = 1.5
+
+[node name="Root" type="Spatial" parent="."]
+
+[node name="Anchor" type="Spatial" parent="Root"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00232983, 0, 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Root/Anchor"]
+transform = Transform( 0, 0, 1, 0, 1, 0, -1, 0, 0, 0, 0, -0.975415 )
+mesh = ExtResource( 2 )
+
+[node name="MuzzleFlash" parent="Root/Anchor" instance=ExtResource( 3 )]
+transform = Transform( 7.63422, 0, 0, 0, 7.18721, 0, 0, 0, 7.18721, 0, 0.46943, -4.33103 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Equip = SubResource( 1 )
+anims/Fire = SubResource( 4 )
+anims/RESET = SubResource( 2 )
+anims/Reload = SubResource( 5 )
+anims/Unequip = SubResource( 3 )
